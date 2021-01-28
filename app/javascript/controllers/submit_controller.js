@@ -8,7 +8,7 @@
 // </div>
 
 import { Controller } from "stimulus"
-
+import Rails from '@rails/ujs';
 export default class extends Controller {
 
   connect() {
@@ -24,6 +24,12 @@ export default class extends Controller {
             lng: position.coords.longitude,
           };
           console.log(pos);
+          Rails.ajax({
+            type: "post",
+            url: '/localization',
+            data: `lat=${pos.lat}&lon=${pos.lng}`
+          })
+
         });
     } else {
       console.log('not working')

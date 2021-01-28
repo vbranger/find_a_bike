@@ -1,2 +1,11 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<button data-controller="submit" data-action="click->submit#go">Submit</button>
+<br>
+<% if params[:request] %>
+<%= Request.find(params[:request]).address %>
+<ul>
+  <%= Time.now %>
+  <% Result.where(request: params[:request]).each do |result| %>
+    <li><%= result.station.name %> - <%= result.num_bikes %></li>
+  <% end %>
+</ul>
+<% end %>
